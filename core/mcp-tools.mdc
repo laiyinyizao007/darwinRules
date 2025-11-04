@@ -1,0 +1,180 @@
+# MCP 工具使用指南
+
+> Darwin 项目中 MCP 工具的使用规范
+
+---
+
+## 文件系统工具（filesystem）
+
+### 优先级规则
+
+**优先使用 MCP filesystem 工具，而不是 Cline 内置工具**
+
+**原因：**
+- Cline 的 `write_to_file` 可能触发 diff editor，导致错误
+- MCP 工具直接操作文件，更可靠
+
+### 常用工具
+
+**读取文件：**
+```
+cbf6180mcp0read_text_file
+- 读取文本文件完整内容
+- 支持 head/tail 参数读取部分内容
+```
+
+**写入文件：**
+```
+cbf6180mcp0write_file
+- 创建新文件或完全覆盖现有文件
+- 自动处理文本编码
+```
+
+**编辑文件：**
+```
+cbf6180mcp0edit_file
+- 基于行的编辑（替换指定文本）
+- 支持 dryRun 预览模式
+```
+
+**目录操作：**
+```
+cbf6180mcp0list_directory - 列出目录内容
+cbf6180mcp0create_directory - 创建目录
+cbf6180mcp0directory_tree - 获取目录树结构（JSON格式）
+```
+
+**搜索文件：**
+```
+cbf6180mcp0search_files - 递归搜索文件
+cbf6180mcp0get_file_info - 获取文件元数据
+```
+
+---
+
+## Git 工具（git）
+
+### 基础操作
+
+**状态查看：**
+```
+9a881b0mcp0git_status - 查看工作区状态
+9a881b0mcp0git_log - 查看提交历史
+9a881b0mcp0git_diff - 查看差异
+```
+
+**提交流程：**
+```
+9a881b0mcp0git_add - 暂存文件
+9a881b0mcp0git_commit - 提交更改
+9a881b0mcp0git_push - 推送到远程
+```
+
+### 工作目录设置
+
+**推荐做法：**
+```
+9a881b0mcp0git_set_working_dir
+- 设置会话工作目录
+- 后续 git 操作无需重复指定路径
+```
+
+---
+
+## GitHub 工具（github）
+
+### 仓库操作
+
+**读取文件：**
+```
+c0b0100mcp0get_file_contents
+- 从 GitHub 仓库读取文件
+- 支持指定分支
+```
+
+**创建/更新文件：**
+```
+c0b0100mcp0create_or_update_file - 单个文件
+c0b0100mcp0push_files - 批量提交多个文件
+```
+
+### Issue 和 PR
+
+**Issue 操作：**
+```
+c0b0100mcp0create_issue - 创建 Issue
+c0b0100mcp0list_issues - 列出 Issues
+c0b0100mcp0update_issue - 更新 Issue
+```
+
+**Pull Request：**
+```
+c0b0100mcp0create_pull_request - 创建 PR
+c0b0100mcp0get_pull_request - 获取 PR 详情
+c0b0100mcp0merge_pull_request - 合并 PR
+```
+
+---
+
+## Context7 工具（文档查询）
+
+### 库文档查询
+
+**使用流程：**
+```
+1. 0472110mcp0resolve-library-id - 解析库名到 ID
+2. 0472110mcp0get-library-docs - 获取文档
+```
+
+**示例：**
+```
+查询 React 文档：
+1. resolve-library-id: "react"
+2. get-library-docs: "/facebook/react"
+```
+
+---
+
+## Puppeteer 工具（浏览器自动化）
+
+### 基础操作
+
+**导航：**
+```
+c83c910mcp0puppeteer_navigate - 打开网页
+```
+
+**交互：**
+```
+c83c910mcp0puppeteer_click - 点击元素
+c83c910mcp0puppeteer_fill - 填写表单
+c83c910mcp0puppeteer_screenshot - 截图
+```
+
+**执行脚本：**
+```
+c83c910mcp0puppeteer_evaluate - 在浏览器中执行 JS
+```
+
+---
+
+## Sequential Thinking 工具
+
+### 复杂问题解决
+
+**使用场景：**
+- 需要多步骤解决的复杂问题
+- 需要规划工具使用顺序
+- 需要推理和验证假设
+
+**核心参数：**
+```
+- available_mcp_tools: 可用的 MCP 工具列表
+- thought: 当前思考步骤
+- current_step: 当前推荐的操作步骤
+- recommended_tools: 推荐使用的工具
+```
+
+---
+
+**更新日期**: 2025-11-04
