@@ -1,0 +1,135 @@
+# Darwin 项目目录结构规范
+
+> 模块化项目组织，分离关注点
+
+---
+
+## 标准目录结构
+
+```
+项目根目录/
+├── .clinerules/              # Darwin 规则配置
+│   ├── common/              # 通用规则
+│   └── project-specific/    # 项目规则
+│
+├── docs/                    # 项目文档
+│   ├── core/               # 核心文档
+│   │   ├── product_requirement_docs.md  # PRD
+│   │   ├── architecture.md              # 架构设计
+│   │   └── technical.md                 # 技术规范
+│   ├── guides/             # 指南文档
+│   └── literature/         # 文献资料
+│
+├── tasks/                   # 任务管理
+│   ├── active_context.md   # 当前上下文
+│   ├── tasks_plan.md       # 任务计划
+│   └── rfc/                # 功能提案
+│
+├── src/ 或 core/           # 源代码
+├── tests/                  # 测试文件
+├── scripts/                # 脚本工具
+├── config/                 # 配置文件
+├── data/                   # 数据文件
+├── logs/                   # 日志文件
+└── utils/                  # 工具函数
+```
+
+---
+
+## 目录说明
+
+### 核心目录
+
+**`.clinerules/`** - Darwin 规则系统
+- `common/` - 跨项目共享的通用规则
+- `project-specific/` - 项目特定规则和记忆
+
+**`docs/`** - 项目文档中心
+- `core/` - 核心设计文档（PRD、架构、技术规范）
+- `guides/` - 使用指南和最佳实践
+- `literature/` - 参考文献和研究资料
+
+**`tasks/`** - 任务与上下文管理
+- `active_context.md` - 当前开发上下文
+- `tasks_plan.md` - 任务积压和进度
+- `rfc/` - 功能设计提案（Request for Comments）
+
+### 代码目录
+
+**`src/` 或 `core/`** - 主要源代码
+- 按功能模块组织子目录
+- 保持高内聚、低耦合
+
+**`tests/`** - 测试套件
+- 单元测试
+- 集成测试
+- 端到端测试
+
+**`scripts/`** - 自动化脚本
+- 构建脚本
+- 部署脚本
+- 数据处理脚本
+
+### 支持目录
+
+**`config/`** - 配置文件
+- 环境配置
+- 应用配置
+- 第三方服务配置
+
+**`data/`** - 数据文件
+- 示例数据
+- 测试数据
+- 静态资源
+
+**`logs/`** - 日志文件
+- 应用日志
+- 错误日志
+- 访问日志
+
+**`utils/`** - 通用工具
+- 辅助函数
+- 共享组件
+- 跨模块工具
+
+---
+
+## 文件命名约定
+
+### Python 项目
+- 模块文件：`snake_case.py`
+- 测试文件：`test_*.py`
+- 配置文件：`*.yaml`, `*.json`, `*.toml`
+
+### JavaScript/TypeScript 项目
+- 组件文件：`PascalCase.tsx`
+- 工具文件：`camelCase.ts`
+- 测试文件：`*.test.ts`, `*.spec.ts`
+
+### 文档文件
+- Markdown：`kebab-case.md`
+- 全大写：`README.md`, `LICENSE`, `CHANGELOG.md`
+
+---
+
+## 关注点分离原则
+
+1. **文档与代码分离** - `docs/` vs `src/`
+2. **测试与实现分离** - `tests/` vs `src/`
+3. **配置与代码分离** - `config/` vs `src/`
+4. **数据与逻辑分离** - `data/` vs `src/`
+5. **规则与项目分离** - `.clinerules/` 独立管理
+
+---
+
+## 最佳实践
+
+1. ✅ **模块化组织** - 每个目录单一职责
+2. ✅ **扁平化优先** - 避免过深的目录嵌套
+3. ✅ **命名一致性** - 遵循约定的命名规范
+4. ✅ **文档就近** - 代码旁边放相关文档
+5. ✅ **版本控制** - 合理使用 `.gitignore`
+
+---
+
+**更新日期**: 2025-11-04
