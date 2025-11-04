@@ -1,0 +1,63 @@
+# Darwin 通用规则
+
+> 所有 Darwin 项目共享的基础规则
+
+---
+
+## 核心原则
+
+1. **自动执行命令**
+   - 所有 `execute_command` 默认 `requires_approval: false`
+   - 提高工作效率，减少等待
+
+2. **优先安装而非替代**
+   - 缺少依赖时先安装，不要找替代方案
+   - 记录所有新依赖
+
+3. **MCP 工具优先**
+   - 文件操作优先使用 MCP filesystem 工具
+   - 避免 diff editor 问题
+
+---
+
+## 文件操作
+
+### 工具选择优先级
+
+1. **MCP Filesystem**（首选）
+   - `cbf6180mcp0write_file` - 创建/覆盖文件
+   - `cbf6180mcp0read_text_file` - 读取文件
+   - `cbf6180mcp0edit_file` - 编辑文件
+
+2. **Cline 内置**（备选）
+   - `write_to_file`
+   - `replace_in_file`
+
+---
+
+## 代码规范
+
+- Python: PEP 8
+- 文档字符串: Google Style
+- 测试覆盖率: > 80%
+- 类型注解: 必须使用
+
+---
+
+## Git 提交规范
+
+**Commit Message 格式：**
+```
+<type>(<scope>): <subject>
+```
+
+**Type 类型：**
+- `feat`: 新功能
+- `fix`: 修复 bug
+- `docs`: 文档更新
+- `test`: 测试相关
+- `refactor`: 重构代码
+
+---
+
+**更新日期**: 2025-11-04
